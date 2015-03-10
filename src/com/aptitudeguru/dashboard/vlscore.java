@@ -147,7 +147,21 @@ Button btn_help = (Button) findViewById(R.id.btn_help);
 			}
 		});
 
-	 
+		Button btn_v3 = (Button) findViewById(R.id.btn_v3);
+
+		 
+		btn_v3.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				 
+				String cat = "v3";
+				Intent i = new Intent(getApplicationContext(), TestScore.class);
+				i.putExtra("cat", cat);
+				startActivity(i);
+			}
+		});
+		
 		Button btn_v4 = (Button) findViewById(R.id.btn_v4);
 
 		 
@@ -210,39 +224,5 @@ Button btn_help = (Button) findViewById(R.id.btn_help);
 				startActivity(i);
 			}
 		});
-
-	 
-		Button btn_v8 = (Button) findViewById(R.id.btn_v8);
-
-		 
-		btn_v8.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				 
-				String cat = "v8";
-				Intent i = new Intent(getApplicationContext(), TestScore.class);
-				i.putExtra("cat", cat);
-				startActivity(i);
-			}
-		});
-
-	 
-		Button btn_v3 = (Button) findViewById(R.id.btn_v3);
-
-		 
-		btn_v3.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-				 
-				String cat = "v3";
-				Intent i = new Intent(getApplicationContext(), TestScore.class);
-				i.putExtra("cat", cat);
-				startActivity(i);
-			}
-		});
-
-
 	}
 }

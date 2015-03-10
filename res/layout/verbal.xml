@@ -51,7 +51,15 @@
                     android:layout_gravity="right"
                      android:background="@drawable/shape"
                     android:text="@string/v2" />
-
+				
+                <Button
+                    android:id="@+id/btn_v3"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                     android:background="@drawable/shape"
+                    android:text="@string/v3" />
+                
                 <Button
                     android:id="@+id/btn_v4"
                     android:layout_width="match_parent"
@@ -84,24 +92,6 @@
                      android:background="@drawable/shape"
                     android:text="@string/v7" />
 
-                <Button
-                    android:id="@+id/btn_v8"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
-                     android:background="@drawable/shape"
-                    android:text="@string/v8" />
-
-                <Button
-                    android:id="@+id/btn_v3"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_gravity="right"
-                     android:background="@drawable/shape"
-                    android:text="@string/v3" />
-
-
-                
             </LinearLayout>
 
         </ScrollView>
