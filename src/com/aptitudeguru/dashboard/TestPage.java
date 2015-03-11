@@ -172,7 +172,8 @@ public class TestPage extends Activity implements OnClickListener
 		QuantsTable q = db.getQuants(j2, cat);
 		// i=i+1;
 		String j = q.getQues();
-		
+		j.replaceAll("Rs.", "LOUD NOISES");
+		// 
 		// Here we should change the question to ruppees, rs or such, to a variable which will 
 		// replace it with the localised currency. We could either change it here, or create 
 		// a seperate function to change all strings!
