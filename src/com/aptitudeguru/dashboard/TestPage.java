@@ -172,13 +172,22 @@ public class TestPage extends Activity implements OnClickListener
 		QuantsTable q = db.getQuants(j2, cat);
 		// i=i+1;
 		String j = q.getQues();
+		
+		// Here we should change the question to ruppees, rs or such, to a variable which will 
+		// replace it with the localised currency. We could either change it here, or create 
+		// a seperate function to change all strings!
+		
 		t1.setText(j);
 		t2.setText("   " + (j1 + 1) + "/20");
 		String opt1 = q.getOption1();
 		String opt2 = q.getOption2();
 		String opt3 = q.getOption3();
 		String opt4 = q.getOption4();
-
+		
+		// Here we should change the answers to ruppees, rs or such, to a variable which will 
+		// replace it with the localised currency. We could either change it here, or create 
+		// a seperate function to change all strings!
+		
 		b1.setText(opt1);
 		b2.setText(opt2);
 		b3.setText(opt3);
