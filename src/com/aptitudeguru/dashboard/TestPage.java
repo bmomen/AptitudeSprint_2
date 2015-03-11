@@ -172,7 +172,7 @@ public class TestPage extends Activity implements OnClickListener
 		QuantsTable q = db.getQuants(j2, cat);
 		// i=i+1;
 		String j = q.getQues();
-		j.replaceAll("Rs.", "LOUD NOISES");
+		
 		// 
 		// Here we should change the question to ruppees, rs or such, to a variable which will 
 		// replace it with the localised currency. We could either change it here, or create 
@@ -605,7 +605,13 @@ public class TestPage extends Activity implements OnClickListener
 					QuantsTable q = db.getQuants(val, cat);
 					// i=i+1;
 					String j = q.getQues();
-					t1.setText(j);
+					String v = j;
+					String locale = getResources().getString(R.string.country);
+			if(j.contains("Rs."))
+			{
+				v=j.replace("Rs.", locale);
+			}
+					t1.setText(v);
 
 					String opt1 = q.getOption1();
 					String opt2 = q.getOption2();
