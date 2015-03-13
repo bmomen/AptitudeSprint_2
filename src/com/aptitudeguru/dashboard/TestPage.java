@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +19,6 @@ import android.widget.Button;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import android.widget.TextView;
 import android.widget.Toast;
 import androidhive.dashboard.R;
@@ -172,13 +170,13 @@ public class TestPage extends Activity implements OnClickListener
 		QuantsTable q = db.getQuants(j2, cat);
 		// i=i+1;
 		String j = q.getQues();
-		
+		String v = getLocaleCurrency(j);
 		// 
 		// Here we should change the question to ruppees, rs or such, to a variable which will 
 		// replace it with the localised currency. We could either change it here, or create 
 		// a seperate function to change all strings!
 		
-		t1.setText(j);
+		t1.setText(v);
 		t2.setText("   " + (j1 + 1) + "/20");
 		String opt1 = q.getOption1();
 		String opt2 = q.getOption2();
@@ -544,15 +542,22 @@ public class TestPage extends Activity implements OnClickListener
 		givenans[0] = initans[count];
 		t2.setText("   " + "1/20");
 		String j = q.getQues();
+		String v = getLocaleCurrency(j);
 		String opt1 = q.getOption1();
 		String opt2 = q.getOption2();
 		String opt3 = q.getOption3();
 		String opt4 = q.getOption4();
-		t1.setText(j);
-		b1.setText(opt1);
-		b2.setText(opt2);
-		b3.setText(opt3);
-		b4.setText(opt4);
+		t1.setText(v);
+		String finalOpt1 = getLocaleCurrency(opt1);
+		String finalOpt2 = getLocaleCurrency(opt2);
+		String finalOpt3 = getLocaleCurrency(opt3);
+		String finalOpt4 = getLocaleCurrency(opt4);
+		
+		b1.setText(finalOpt1);
+		b2.setText(finalOpt2);
+		b3.setText(finalOpt3);
+		b4.setText(finalOpt4);
+		
 		btn_next.setVisibility(View.VISIBLE);
 		btn_prev.setVisibility(View.INVISIBLE);
 		for (int x = 1; x < 20; x++) {
@@ -605,29 +610,34 @@ public class TestPage extends Activity implements OnClickListener
 					QuantsTable q = db.getQuants(val, cat);
 					// i=i+1;
 					String j = q.getQues();
+					/*
 					String v = j;
 					String locale = getResources().getString(R.string.country);
-			if(j.contains("Rs."))
-			{
-				v=j.replace("Rs.", locale);
-			}
+					if(j.contains("Rs."))
+					{
+						v=j.replace("Rs.", locale);
+					}*/
+					String v = getLocaleCurrency(j);
 					t1.setText(v);
-
+		
 					String opt1 = q.getOption1();
 					String opt2 = q.getOption2();
 					String opt3 = q.getOption3();
 					String opt4 = q.getOption4();
-					// t1.setText();
-					b1.setText(opt1);
-					b2.setText(opt2);
-					b3.setText(opt3);
-					b4.setText(opt4);
-					// radiogroup.setOnCheckedChangeListener(this);
-
+					
+					String finalOpt1 = getLocaleCurrency(opt1);
+					String finalOpt2 = getLocaleCurrency(opt2);
+					String finalOpt3 = getLocaleCurrency(opt3);
+					String finalOpt4 = getLocaleCurrency(opt4);
+					
+					b1.setText(finalOpt1);
+					b2.setText(finalOpt2);
+					b3.setText(finalOpt3);
+					b4.setText(finalOpt4);
+		
+					}
 				}
-
-			}
-		});
+			});
 		// prev
 		btn_prev.setOnClickListener(new View.OnClickListener() {
 
@@ -668,17 +678,24 @@ public class TestPage extends Activity implements OnClickListener
 					QuantsTable q = db.getQuants(val, cat);
 					// i=i+1;
 					String j = q.getQues();
-					t1.setText(j);
+					String v = getLocaleCurrency(j);
+				
+					t1.setText(v);
 					t2.setText("   " + (click + 1) + "/20");
 					String opt1 = q.getOption1();
 					String opt2 = q.getOption2();
 					String opt3 = q.getOption3();
 					String opt4 = q.getOption4();
-					t1.setText(j);
-					b1.setText(opt1);
-					b2.setText(opt2);
-					b3.setText(opt3);
-					b4.setText(opt4);
+					
+					String finalOpt1 = getLocaleCurrency(opt1);
+					String finalOpt2 = getLocaleCurrency(opt2);
+					String finalOpt3 = getLocaleCurrency(opt3);
+					String finalOpt4 = getLocaleCurrency(opt4);
+					
+					b1.setText(finalOpt1);
+					b2.setText(finalOpt2);
+					b3.setText(finalOpt3);
+					b4.setText(finalOpt4);
 
 				}
 			}
@@ -780,6 +797,28 @@ public class TestPage extends Activity implements OnClickListener
 
 		}
 
+	}
+	public String getLocaleCurrency(String text)
+	{
+		String newText = text;
+		
+		String localeSign = getResources().getString(R.string.currencySign);
+		String localeCurrency = getResources().getString(R.string.currencyName);
+
+		if(text.contains("Rs"))
+		{
+			newText = text.replace("Rs", localeSign);
+		} 
+		if(text.contains("Rs."))
+		{
+			newText = text.replace("Rs.", localeSign);
+		}
+		if(text.contains("rupee"))
+		{
+			newText = text.replace("rupee", localeCurrency);
+		}
+
+		return newText;
 	}
 
 }
