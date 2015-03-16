@@ -75,5 +75,7 @@
     <string name="head">Aptitude Guru</string>
     <string name="currencySign">£</string>
     <string name="currencyName">pounds</string>
+    <string name="distanceName">mph</string>
+    <string name="distanceNamelong">miles</string>
 
 </resources>

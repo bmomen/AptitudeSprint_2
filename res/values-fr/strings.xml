@@ -75,5 +75,7 @@
     <string name="head">Aptitude Guru</string>
     <string name="currencyName">euro</string>
     <string name="currencySign">€</string>
+    <string name="distanceName">kmph</string>
+    <string name="distanceNamelong">km</string>
 
 </resources>

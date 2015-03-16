@@ -804,18 +804,28 @@ public class TestPage extends Activity implements OnClickListener
 		
 		String localeSign = getResources().getString(R.string.currencySign);
 		String localeCurrency = getResources().getString(R.string.currencyName);
+		String localeDistance = getResources().getString(R.string.distanceName);
+		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
 
-		if(text.contains("Rs"))
+		if(newText.contains("Rs."))
 		{
-			newText = text.replace("Rs", localeSign);
-		} 
-		if(text.contains("Rs."))
-		{
-			newText = text.replace("Rs.", localeSign);
+			newText = newText.replace("Rs.", localeSign);
 		}
-		if(text.contains("rupee"))
+		if(newText.contains("Rs"))
 		{
-			newText = text.replace("rupee", localeCurrency);
+			newText = newText.replace("Rs", localeSign);
+		} 
+		if(newText.contains("rupee"))
+		{
+			newText = newText.replace("rupee", localeCurrency);
+		}
+		if(newText.contains("kmph"))
+		{
+			newText = newText.replace("kmph", localeDistance);
+		}
+		if(newText.contains("km"))
+		{
+			newText = newText.replace("km", localeDistancelong);
 		}
 
 		return newText;
