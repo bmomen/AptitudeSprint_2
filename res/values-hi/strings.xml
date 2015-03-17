@@ -75,5 +75,7 @@
     <string name="head">Aptitude Guru</string>
     <string name="distanceName">kmph</string>
     <string name="distanceNamelong">km</string>
+    <string name="currencyName">rupee</string>
+    <string name="currencySign">rs</string>
 
 </resources>
