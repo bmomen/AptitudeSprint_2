@@ -137,6 +137,12 @@ public class Result extends Activity {
 		String opt4 = q.getOption4();
 		String sol = q.getSol();
 
+		String finalQ = getLocaleCurrency(j);
+		String finalOpt1 = getLocaleCurrency(opt1);
+		String finalOpt2 = getLocaleCurrency(opt2);
+		String finalOpt3 = getLocaleCurrency(opt3);
+		String finalOpt4 = getLocaleCurrency(opt4);
+		
 		t1 = (TextView) findViewById(R.id.quest1);
 		t2 = (TextView) findViewById(R.id.op1);
 		t3 = (TextView) findViewById(R.id.op2);
@@ -145,11 +151,11 @@ public class Result extends Activity {
 		t6 = (TextView) findViewById(R.id.selans);
 		t7 = (TextView) findViewById(R.id.corrans);
 		t8 = (TextView) findViewById(R.id.timer);
-		t1.setText(j);
-		t2.setText("1." + opt1);
-		t3.setText("2." + opt2);
-		t4.setText("3." + opt3);
-		t5.setText("4." + opt4);
+		t1.setText(finalQ);
+		t2.setText("1." + finalOpt1);
+		t3.setText("2." + finalOpt2);
+		t4.setText("3." + finalOpt3);
+		t5.setText("4." + finalOpt4);
 		int p = yourans[current];
 		String j1 = p + "";
 		if (p == 0)
@@ -194,11 +200,18 @@ public class Result extends Activity {
 					t6 = (TextView) findViewById(R.id.selans);
 					t7 = (TextView) findViewById(R.id.corrans);
 					String sol = q.getSol();
-					t1.setText(j);
-					t2.setText("1." + opt1);
-					t3.setText("2." + opt2);
-					t4.setText("3." + opt3);
-					t5.setText("4." + opt4);
+					
+					String finalQ = getLocaleCurrency(j);
+					String finalOpt1 = getLocaleCurrency(opt1);
+					String finalOpt2 = getLocaleCurrency(opt2);
+					String finalOpt3 = getLocaleCurrency(opt3);
+					String finalOpt4 = getLocaleCurrency(opt4);
+					
+					t1.setText(finalQ);
+					t2.setText("1." + finalOpt1);
+					t3.setText("2." + finalOpt2);
+					t4.setText("3." + finalOpt3);
+					t5.setText("4." + finalOpt4);
 					int p = yourans[current];
 					String j1 = p + "";
 					if (p == 0)
@@ -239,6 +252,13 @@ public class Result extends Activity {
 					String opt3 = q.getOption3();
 					String opt4 = q.getOption4();
 					String sol = q.getSol();
+					
+					String finalQ = getLocaleCurrency(j);
+					String finalOpt1 = getLocaleCurrency(opt1);
+					String finalOpt2 = getLocaleCurrency(opt2);
+					String finalOpt3 = getLocaleCurrency(opt3);
+					String finalOpt4 = getLocaleCurrency(opt4);
+					
 					t1 = (TextView) findViewById(R.id.quest1);
 					t2 = (TextView) findViewById(R.id.op1);
 					t3 = (TextView) findViewById(R.id.op2);
@@ -247,11 +267,11 @@ public class Result extends Activity {
 					t6 = (TextView) findViewById(R.id.selans);
 					t7 = (TextView) findViewById(R.id.corrans);
 
-					t1.setText(j);
-					t2.setText("1." + opt1);
-					t3.setText("2." + opt2);
-					t4.setText("3." + opt3);
-					t5.setText("4." + opt4);
+					t1.setText(finalQ);
+					t2.setText("1." + finalOpt1);
+					t3.setText("2." + finalOpt2);
+					t4.setText("3." + finalOpt3);
+					t5.setText("4." + finalOpt4);
 					int p = yourans[current];
 					String j1 = p + "";
 					if (p == 0)
@@ -320,5 +340,38 @@ public class Result extends Activity {
 			}
 		});
 
+	}
+	
+	public String getLocaleCurrency(String text)
+	{
+		String newText = text;
+		
+		String localeSign = getResources().getString(R.string.currencySign);
+		String localeCurrency = getResources().getString(R.string.currencyName);
+		String localeDistance = getResources().getString(R.string.distanceName);
+		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+
+		if(newText.contains("Rs."))
+		{
+			newText = newText.replace("Rs.", localeSign);
+		}
+		if(newText.contains("Rs"))
+		{
+			newText = newText.replace("Rs", localeSign);
+		} 
+		if(newText.contains("rupee"))
+		{
+			newText = newText.replace("rupee", localeCurrency);
+		}
+		if(newText.contains("kmph"))
+		{
+			newText = newText.replace("kmph", localeDistance);
+		}
+		if(newText.contains("km"))
+		{
+			newText = newText.replace("km", localeDistancelong);
+		}
+
+		return newText;
 	}
 }
