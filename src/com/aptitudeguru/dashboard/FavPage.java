@@ -9,12 +9,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-
 import android.widget.TextView;
 import android.widget.Toast;
 import androidhive.dashboard.R;
@@ -204,11 +202,19 @@ public class FavPage extends Activity {
 				op3 = f1.getOption3();
 				op4 = f1.getOption4();
 				sol = f1.getSol();
-				t1.setText(ques);
-				t2.setText("A." + op1);
-				t3.setText("B." + op2);
-				t4.setText("C." + op3);
-				t5.setText("D." + op4);
+				
+				String finalQ = getLocaleCurrency(ques);
+				String finalOpt1 = getLocaleCurrency(op1);
+				String finalOpt2 = getLocaleCurrency(op2);
+				String finalOpt3 = getLocaleCurrency(op3);
+				String finalOpt4 = getLocaleCurrency(op4);
+				
+				
+				t1.setText(finalQ);
+				t2.setText("A." + finalOpt1);
+				t3.setText("B." + finalOpt2);
+				t4.setText("C." + finalOpt3);
+				t5.setText("D." + finalOpt4);
 				t6.setText("solution :" + sol);
 
 				btn_next = (Button) findViewById(R.id.btn_next);
@@ -242,11 +248,18 @@ public class FavPage extends Activity {
 							op3 = f3.getOption3();
 							op4 = f3.getOption4();
 							sol = f3.getSol();
-							t1.setText(ques);
-							t2.setText("A." + op1);
-							t3.setText("B." + op2);
-							t4.setText("C." + op3);
-							t5.setText("D." + op4);
+							
+							String finalQ = getLocaleCurrency(ques);
+							String finalOpt1 = getLocaleCurrency(op1);
+							String finalOpt2 = getLocaleCurrency(op2);
+							String finalOpt3 = getLocaleCurrency(op3);
+							String finalOpt4 = getLocaleCurrency(op4);
+							
+							t1.setText(finalQ);
+							t2.setText("A." + finalOpt1);
+							t3.setText("B." + finalOpt2);
+							t4.setText("C." + finalOpt3);
+							t5.setText("D." + finalOpt4);
 							t6.setText("solution :" + sol);
 
 						}
@@ -274,11 +287,18 @@ public class FavPage extends Activity {
 							op3 = f3.getOption3();
 							op4 = f3.getOption4();
 							sol = f3.getSol();
-							t1.setText(ques);
-							t2.setText("A." + op1);
-							t3.setText("B." + op2);
-							t4.setText("C." + op3);
-							t5.setText("D." + op4);
+							
+							String finalQ = getLocaleCurrency(ques);
+							String finalOpt1 = getLocaleCurrency(op1);
+							String finalOpt2 = getLocaleCurrency(op2);
+							String finalOpt3 = getLocaleCurrency(op3);
+							String finalOpt4 = getLocaleCurrency(op4);
+							
+							t1.setText(finalQ);
+							t2.setText("A." + finalOpt1);
+							t3.setText("B." + finalOpt2);
+							t4.setText("C." + finalOpt3);
+							t5.setText("D." + finalOpt4);
 							t6.setText("solution :" + sol);
 
 						}
@@ -419,5 +439,38 @@ public class FavPage extends Activity {
 			});
 		}
 
+	}
+
+	public String getLocaleCurrency(String text)
+	{
+		String newText = text;
+		
+		String localeSign = getResources().getString(R.string.currencySign);
+		String localeCurrency = getResources().getString(R.string.currencyName);
+		String localeDistance = getResources().getString(R.string.distanceName);
+		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+
+		if(newText.contains("Rs."))
+		{
+			newText = newText.replace("Rs.", localeSign);
+		}
+		if(newText.contains("Rs"))
+		{
+			newText = newText.replace("Rs", localeSign);
+		} 
+		if(newText.contains("rupee"))
+		{
+			newText = newText.replace("rupee", localeCurrency);
+		}
+		if(newText.contains("kmph"))
+		{
+			newText = newText.replace("kmph", localeDistance);
+		}
+		if(newText.contains("km"))
+		{
+			newText = newText.replace("km", localeDistancelong);
+		}
+
+		return newText;
 	}
 }
