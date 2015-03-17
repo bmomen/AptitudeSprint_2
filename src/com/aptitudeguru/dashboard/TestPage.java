@@ -823,7 +823,7 @@ public class TestPage extends Activity implements OnClickListener
 		{
 			newText = newText.replace("kmph", localeDistance);
 		}
-		if(newText.contains("km"))
+		if(newText.contains("km "))
 		{
 			newText = newText.replace("km", localeDistancelong);
 		}
