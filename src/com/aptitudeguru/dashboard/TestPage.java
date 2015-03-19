@@ -66,7 +66,7 @@ public class TestPage extends Activity implements OnClickListener
 	private final long interval = 1 * 1000;
 	private long starttime1 = 60 * 20 * 1000;
 	private long milifin = 0;
-
+	
 	int k1 = 0;
 
 	// private final long startTime1 =
@@ -170,7 +170,11 @@ public class TestPage extends Activity implements OnClickListener
 		QuantsTable q = db.getQuants(j2, cat);
 		// i=i+1;
 		String j = q.getQues();
-		String v = getLocaleCurrency(j);
+		String localeSign = getResources().getString(R.string.currencySign);
+		String localeCurrency = getResources().getString(R.string.currencyName);
+		String localeDistance = getResources().getString(R.string.distanceName);
+		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+		String v = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
 		// 
 		// Here we should change the question to ruppees, rs or such, to a variable which will 
 		// replace it with the localised currency. We could either change it here, or create 
@@ -541,17 +545,25 @@ public class TestPage extends Activity implements OnClickListener
 		a[index++] = initial[count];
 		givenans[0] = initans[count];
 		t2.setText("   " + "1/20");
+		
+		
+		String localeSign = getResources().getString(R.string.currencySign);
+		String localeCurrency = getResources().getString(R.string.currencyName);
+		String localeDistance = getResources().getString(R.string.distanceName);
+		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+		
+		
 		String j = q.getQues();
-		String v = getLocaleCurrency(j);
+		String v = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
 		String opt1 = q.getOption1();
 		String opt2 = q.getOption2();
 		String opt3 = q.getOption3();
 		String opt4 = q.getOption4();
 		t1.setText(v);
-		String finalOpt1 = getLocaleCurrency(opt1);
-		String finalOpt2 = getLocaleCurrency(opt2);
-		String finalOpt3 = getLocaleCurrency(opt3);
-		String finalOpt4 = getLocaleCurrency(opt4);
+		String finalOpt1 = getLocaleCurrency(opt1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt2 = getLocaleCurrency(opt2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt3 = getLocaleCurrency(opt3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt4 = getLocaleCurrency(opt4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 		
 		b1.setText(finalOpt1);
 		b2.setText(finalOpt2);
@@ -606,7 +618,12 @@ public class TestPage extends Activity implements OnClickListener
 					else {
 					}
 					t2.setText("   " + (click + 1) + "/20");
-
+					
+					String localeSign = getResources().getString(R.string.currencySign);
+					String localeCurrency = getResources().getString(R.string.currencyName);
+					String localeDistance = getResources().getString(R.string.distanceName);
+					String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+					
 					QuantsTable q = db.getQuants(val, cat);
 					// i=i+1;
 					String j = q.getQues();
@@ -617,7 +634,7 @@ public class TestPage extends Activity implements OnClickListener
 					{
 						v=j.replace("Rs.", locale);
 					}*/
-					String v = getLocaleCurrency(j);
+					String v = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
 					t1.setText(v);
 		
 					String opt1 = q.getOption1();
@@ -625,10 +642,10 @@ public class TestPage extends Activity implements OnClickListener
 					String opt3 = q.getOption3();
 					String opt4 = q.getOption4();
 					
-					String finalOpt1 = getLocaleCurrency(opt1);
-					String finalOpt2 = getLocaleCurrency(opt2);
-					String finalOpt3 = getLocaleCurrency(opt3);
-					String finalOpt4 = getLocaleCurrency(opt4);
+					String finalOpt1 = getLocaleCurrency(opt1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt2 = getLocaleCurrency(opt2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt3 = getLocaleCurrency(opt3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt4 = getLocaleCurrency(opt4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 					
 					b1.setText(finalOpt1);
 					b2.setText(finalOpt2);
@@ -674,11 +691,16 @@ public class TestPage extends Activity implements OnClickListener
 						b4.setChecked(true);
 					else {
 					}
-
+					
+					String localeSign = getResources().getString(R.string.currencySign);
+					String localeCurrency = getResources().getString(R.string.currencyName);
+					String localeDistance = getResources().getString(R.string.distanceName);
+					String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+					
 					QuantsTable q = db.getQuants(val, cat);
 					// i=i+1;
 					String j = q.getQues();
-					String v = getLocaleCurrency(j);
+					String v = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
 				
 					t1.setText(v);
 					t2.setText("   " + (click + 1) + "/20");
@@ -687,10 +709,10 @@ public class TestPage extends Activity implements OnClickListener
 					String opt3 = q.getOption3();
 					String opt4 = q.getOption4();
 					
-					String finalOpt1 = getLocaleCurrency(opt1);
-					String finalOpt2 = getLocaleCurrency(opt2);
-					String finalOpt3 = getLocaleCurrency(opt3);
-					String finalOpt4 = getLocaleCurrency(opt4);
+					String finalOpt1 = getLocaleCurrency(opt1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt2 = getLocaleCurrency(opt2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt3 = getLocaleCurrency(opt3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt4 = getLocaleCurrency(opt4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 					
 					b1.setText(finalOpt1);
 					b2.setText(finalOpt2);
@@ -798,15 +820,10 @@ public class TestPage extends Activity implements OnClickListener
 		}
 
 	}
-	public String getLocaleCurrency(String text)
+	public String getLocaleCurrency(String text, String localeSign, String localeCurrency, String localeDistance, String localeDistancelong)
 	{
 		String newText = text;
 		
-		String localeSign = getResources().getString(R.string.currencySign);
-		String localeCurrency = getResources().getString(R.string.currencyName);
-		String localeDistance = getResources().getString(R.string.distanceName);
-		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
-
 		if(newText.contains("Rs."))
 		{
 			newText = newText.replace("Rs.", localeSign);
