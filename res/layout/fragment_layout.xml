@@ -39,6 +39,8 @@
         style="@style/DashboardButton"
         android:drawableTop="@drawable/compfun"
         android:text="Computer\nFundamentals" />
+    
+    
 
     <!-- Events Button -->
 
@@ -50,5 +52,11 @@
         style="@style/DashboardButton"
         android:drawableTop="@drawable/allinone"
         android:text="@string/allinone" />
+    
+     <Button
+        android:id="@+id/btn_psycho"
+        style="@style/DashboardButton"
+        android:drawableTop="@drawable/psycho"
+        android:text="Psychometric Test" />
 
 </com.aptitudeguru.dashboard.DashboardLayout>

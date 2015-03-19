@@ -203,7 +203,8 @@ public class AndroidDashboardDesignActivity extends Activity {
 
 		
 		Button btn_allinone = (Button) findViewById(R.id.btn_allinone);
-
+		
+		Button btn_psycho = (Button) findViewById(R.id.btn_psycho);
 		
 		btn_quants.setOnClickListener(new View.OnClickListener() {
 
@@ -227,6 +228,29 @@ public class AndroidDashboardDesignActivity extends Activity {
 			}
 		});
 
+		btn_psycho.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+			
+				String cat = "p1";
+				
+				Intent i = new Intent(getApplicationContext(), TestPage.class);
+				i.putExtra("cat", cat);
+
+				startActivity(i);
+				
+				
+				
+				/*
+				 * Intent i = new Intent(getApplicationContext(),
+						Psycho.class);
+				startActivity(i);
+				 */
+			}
+		});
+
+		
 		
 		btn_verbal.setOnClickListener(new View.OnClickListener() {
 
