@@ -37,6 +37,8 @@
             android:label="Language"
             android:screenOrientation="portrait" >
         </activity>
+        
+      
 
         <!-- Messages Activity -->
         <activity
@@ -65,6 +67,14 @@
             android:label="All in One Test" 
             android:screenOrientation="portrait">
         </activity>
+        
+          <activity
+            android:name="com.aptitudeguru.dashboard.Psycho"
+            android:label="Psychometric"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+          
         <activity android:name="com.aptitudeguru.dashboard.TimerActivity"
             android:screenOrientation="portrait" >
         </activity>
