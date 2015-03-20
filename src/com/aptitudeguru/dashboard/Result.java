@@ -137,11 +137,15 @@ public class Result extends Activity {
 		String opt4 = q.getOption4();
 		String sol = q.getSol();
 
-		String finalQ = getLocaleCurrency(j);
-		String finalOpt1 = getLocaleCurrency(opt1);
-		String finalOpt2 = getLocaleCurrency(opt2);
-		String finalOpt3 = getLocaleCurrency(opt3);
-		String finalOpt4 = getLocaleCurrency(opt4);
+		String localeSign = getResources().getString(R.string.currencySign);
+		String localeCurrency = getResources().getString(R.string.currencyName);
+		String localeDistance = getResources().getString(R.string.distanceName);
+		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+		String finalQ = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt1 = getLocaleCurrency(opt1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt2 = getLocaleCurrency(opt2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt3 = getLocaleCurrency(opt3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+		String finalOpt4 = getLocaleCurrency(opt4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 		
 		t1 = (TextView) findViewById(R.id.quest1);
 		t2 = (TextView) findViewById(R.id.op1);
@@ -201,11 +205,15 @@ public class Result extends Activity {
 					t7 = (TextView) findViewById(R.id.corrans);
 					String sol = q.getSol();
 					
-					String finalQ = getLocaleCurrency(j);
-					String finalOpt1 = getLocaleCurrency(opt1);
-					String finalOpt2 = getLocaleCurrency(opt2);
-					String finalOpt3 = getLocaleCurrency(opt3);
-					String finalOpt4 = getLocaleCurrency(opt4);
+					String localeSign = getResources().getString(R.string.currencySign);
+					String localeCurrency = getResources().getString(R.string.currencyName);
+					String localeDistance = getResources().getString(R.string.distanceName);
+					String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+					String finalQ = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt1 = getLocaleCurrency(opt1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt2 = getLocaleCurrency(opt2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt3 = getLocaleCurrency(opt3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt4 = getLocaleCurrency(opt4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 					
 					t1.setText(finalQ);
 					t2.setText("1." + finalOpt1);
@@ -253,11 +261,15 @@ public class Result extends Activity {
 					String opt4 = q.getOption4();
 					String sol = q.getSol();
 					
-					String finalQ = getLocaleCurrency(j);
-					String finalOpt1 = getLocaleCurrency(opt1);
-					String finalOpt2 = getLocaleCurrency(opt2);
-					String finalOpt3 = getLocaleCurrency(opt3);
-					String finalOpt4 = getLocaleCurrency(opt4);
+					String localeSign = getResources().getString(R.string.currencySign);
+					String localeCurrency = getResources().getString(R.string.currencyName);
+					String localeDistance = getResources().getString(R.string.distanceName);
+					String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+					String finalQ = getLocaleCurrency(j, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt1 = getLocaleCurrency(opt1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt2 = getLocaleCurrency(opt2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt3 = getLocaleCurrency(opt3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+					String finalOpt4 = getLocaleCurrency(opt4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 					
 					t1 = (TextView) findViewById(R.id.quest1);
 					t2 = (TextView) findViewById(R.id.op1);
@@ -342,15 +354,10 @@ public class Result extends Activity {
 
 	}
 	
-	public String getLocaleCurrency(String text)
+	public String getLocaleCurrency(String text, String localeSign, String localeCurrency, String localeDistance, String localeDistancelong)
 	{
 		String newText = text;
 		
-		String localeSign = getResources().getString(R.string.currencySign);
-		String localeCurrency = getResources().getString(R.string.currencyName);
-		String localeDistance = getResources().getString(R.string.distanceName);
-		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
-
 		if(newText.contains("Rs."))
 		{
 			newText = newText.replace("Rs.", localeSign);
@@ -367,7 +374,7 @@ public class Result extends Activity {
 		{
 			newText = newText.replace("kmph", localeDistance);
 		}
-		if(newText.contains("km"))
+		if(newText.contains("km "))
 		{
 			newText = newText.replace("km", localeDistancelong);
 		}
