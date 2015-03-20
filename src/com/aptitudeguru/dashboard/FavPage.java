@@ -202,14 +202,17 @@ public class FavPage extends Activity {
 				op3 = f1.getOption3();
 				op4 = f1.getOption4();
 				sol = f1.getSol();
+				String localeSign = getResources().getString(R.string.currencySign);
+				String localeCurrency = getResources().getString(R.string.currencyName);
+				String localeDistance = getResources().getString(R.string.distanceName);
+				String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+				String finalQ = getLocaleCurrency(ques, localeSign, localeCurrency, localeDistance, localeDistancelong);
+				String finalOpt1 = getLocaleCurrency(op1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+				String finalOpt2 = getLocaleCurrency(op2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+				String finalOpt3 = getLocaleCurrency(op3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+				String finalOpt4 = getLocaleCurrency(op4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 				
-				String finalQ = getLocaleCurrency(ques);
-				String finalOpt1 = getLocaleCurrency(op1);
-				String finalOpt2 = getLocaleCurrency(op2);
-				String finalOpt3 = getLocaleCurrency(op3);
-				String finalOpt4 = getLocaleCurrency(op4);
-				
-				
+		
 				t1.setText(finalQ);
 				t2.setText("A." + finalOpt1);
 				t3.setText("B." + finalOpt2);
@@ -248,12 +251,15 @@ public class FavPage extends Activity {
 							op3 = f3.getOption3();
 							op4 = f3.getOption4();
 							sol = f3.getSol();
-							
-							String finalQ = getLocaleCurrency(ques);
-							String finalOpt1 = getLocaleCurrency(op1);
-							String finalOpt2 = getLocaleCurrency(op2);
-							String finalOpt3 = getLocaleCurrency(op3);
-							String finalOpt4 = getLocaleCurrency(op4);
+							String localeSign = getResources().getString(R.string.currencySign);
+							String localeCurrency = getResources().getString(R.string.currencyName);
+							String localeDistance = getResources().getString(R.string.distanceName);
+							String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+							String finalQ = getLocaleCurrency(ques, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt1 = getLocaleCurrency(op1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt2 = getLocaleCurrency(op2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt3 = getLocaleCurrency(op3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt4 = getLocaleCurrency(op4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 							
 							t1.setText(finalQ);
 							t2.setText("A." + finalOpt1);
@@ -287,12 +293,15 @@ public class FavPage extends Activity {
 							op3 = f3.getOption3();
 							op4 = f3.getOption4();
 							sol = f3.getSol();
-							
-							String finalQ = getLocaleCurrency(ques);
-							String finalOpt1 = getLocaleCurrency(op1);
-							String finalOpt2 = getLocaleCurrency(op2);
-							String finalOpt3 = getLocaleCurrency(op3);
-							String finalOpt4 = getLocaleCurrency(op4);
+							String localeSign = getResources().getString(R.string.currencySign);
+							String localeCurrency = getResources().getString(R.string.currencyName);
+							String localeDistance = getResources().getString(R.string.distanceName);
+							String localeDistancelong = getResources().getString(R.string.distanceNamelong);
+							String finalQ = getLocaleCurrency(ques, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt1 = getLocaleCurrency(op1, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt2 = getLocaleCurrency(op2, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt3 = getLocaleCurrency(op3, localeSign, localeCurrency, localeDistance, localeDistancelong);
+							String finalOpt4 = getLocaleCurrency(op4, localeSign, localeCurrency, localeDistance, localeDistancelong);
 							
 							t1.setText(finalQ);
 							t2.setText("A." + finalOpt1);
@@ -441,15 +450,10 @@ public class FavPage extends Activity {
 
 	}
 
-	public String getLocaleCurrency(String text)
+	public String getLocaleCurrency(String text, String localeSign, String localeCurrency, String localeDistance, String localeDistancelong)
 	{
 		String newText = text;
 		
-		String localeSign = getResources().getString(R.string.currencySign);
-		String localeCurrency = getResources().getString(R.string.currencyName);
-		String localeDistance = getResources().getString(R.string.distanceName);
-		String localeDistancelong = getResources().getString(R.string.distanceNamelong);
-
 		if(newText.contains("Rs."))
 		{
 			newText = newText.replace("Rs.", localeSign);
@@ -466,7 +470,7 @@ public class FavPage extends Activity {
 		{
 			newText = newText.replace("kmph", localeDistance);
 		}
-		if(newText.contains("km"))
+		if(newText.contains("km "))
 		{
 			newText = newText.replace("km", localeDistancelong);
 		}
