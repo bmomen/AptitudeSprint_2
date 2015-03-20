@@ -37,6 +37,13 @@
                 android:layout_height="50dp"
                 android:background="#F8F8F8"
                 android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/btn_p1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Psychometric test" />
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

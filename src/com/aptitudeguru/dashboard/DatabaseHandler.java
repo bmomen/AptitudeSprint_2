@@ -26,6 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	private static final String TABLE_CLANGUAGE = "clanguage";
 	private static final String TABLE_CPPLANGUAGE = "cpplanguage";
+	private static final String TABLE_PSYCHO = "psycholanguage";
 	private static final String TABLE_JAVALANGUAGE = "javalanguage";
 	private static final String TABLE_HTMLLANGUAGE = "htmllanguage";
 	private static final String TABLE_VL = "vl";
@@ -71,6 +72,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String KEY_CPPLANGUAGEQUES = "cppques";
 	private static final String KEY_CPPCAT = "cppcat";
 	private static final String KEY_CPPSOL = "sol";
+	
+	private static final String KEY_PSYCHOID = "psychoid";
+	private static final String KEY_PSYCHOQUESTION = "psychoquestion";
+	private static final String KEY_PSYCHOSCAT = "psychoscat";
+	private static final String KEY_PSYCHOSOL = "sol";
 
 	// java language table
 	private static final String KEY_JAVALANGUAGEID = "javaid";
@@ -144,7 +150,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_OPTION1 + " TEXT," + KEY_OPTION2 + " TEXT," + KEY_OPTION3
 				+ " TEXT," + KEY_OPTION4 + " TEXT," + KEY_CPPSOL + " TEXT"
 				+ ")";
+		
+		String CREATE_PSYCHO_TABLE = "CREATE TABLE " + TABLE_PSYCHO
+				+ "(" + KEY_PSYCHOID + " INTEGER PRIMARY KEY,"
+				+ KEY_PSYCHOID + " TEXT," + KEY_PSYCHOSCAT + " TEXT,"
+				+ KEY_OPTION1 + " TEXT," + KEY_OPTION2 + " TEXT," + KEY_OPTION3
+				+ " TEXT," + KEY_OPTION4 + " TEXT," + KEY_PSYCHOSOL + " TEXT"
+				+ ")";
 
+		
+		
 		String CREATE_JAVALANGUAGE_TABLE = "CREATE TABLE " + TABLE_JAVALANGUAGE
 				+ "(" + KEY_JAVALANGUAGEID + " INTEGER PRIMARY KEY,"
 				+ KEY_JAVALANGUAGEQUES + " TEXT," + KEY_JAVACAT + " TEXT,"
@@ -220,6 +235,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUANTS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLANGUAGE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CPPLANGUAGE);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PSYCHO);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_JAVALANGUAGE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_HTMLLANGUAGE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_VL);
@@ -525,7 +541,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return quants;
 
 	}
+	
+	PsychoTable getPsychos(int id, String cat) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		// String where = "KEY_QUANTSID=? AND KEY_QUANTSCAT=? ";
+		Cursor cursor = db.query(TABLE_PSYCHO, new String[] { KEY_PSYCHOID,
+				KEY_PSYCHOQUESTION, KEY_PSYCHOSCAT, KEY_OPTION1, KEY_OPTION2,
+				KEY_OPTION3, KEY_OPTION4, KEY_PSYCHOSOL }, KEY_PSYCHOID + "=?"
+				+ " AND " + KEY_PSYCHOSOL + "=" + "'" + cat + "'",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+		
+		
+		if (cursor != null)
+			cursor.moveToFirst();
 
+		PsychoTable psycho = new PsychoTable(Integer.parseInt(cursor
+				.getString(0)), cursor.getString(1), cursor.getString(2),
+				cursor.getString(3), cursor.getString(4), cursor.getString(5),
+				cursor.getString(6), cursor.getString(7));
+		// return contact
+		db.close();
+		return psycho;
+
+	}
+	
 	QuantsTable getQuants(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TABLE_QUANTS, new String[] { KEY_QUANTSID,
