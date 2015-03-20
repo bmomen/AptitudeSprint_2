@@ -26,7 +26,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	private static final String TABLE_CLANGUAGE = "clanguage";
 	private static final String TABLE_CPPLANGUAGE = "cpplanguage";
-	private static final String TABLE_PSYCHO = "psycholanguage";
+	private static final String TABLE_PSYCHO = "psycho";
 	private static final String TABLE_JAVALANGUAGE = "javalanguage";
 	private static final String TABLE_HTMLLANGUAGE = "htmllanguage";
 	private static final String TABLE_VL = "vl";
@@ -151,7 +151,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ " TEXT," + KEY_OPTION4 + " TEXT," + KEY_CPPSOL + " TEXT"
 				+ ")";
 		
-		String CREATE_PSYCHO_TABLE = "CREATE TABLE " + TABLE_PSYCHO
+		String CREATE_PSYCHO_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_PSYCHO
 				+ "(" + KEY_PSYCHOID + " INTEGER PRIMARY KEY,"
 				+ KEY_PSYCHOID + " TEXT," + KEY_PSYCHOSCAT + " TEXT,"
 				+ KEY_OPTION1 + " TEXT," + KEY_OPTION2 + " TEXT," + KEY_OPTION3
@@ -226,6 +226,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL(CREATE_FAVOURITE_TABLE);
 		db.execSQL(CREATE_SBTABLE_TABLE);
 		db.execSQL(CREATE_PUZZLE_TABLE);
+		db.execSQL(CREATE_PSYCHO_TABLE);
+		
 	}
 
 	// Upgrading database
@@ -235,7 +237,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUANTS);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CLANGUAGE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_CPPLANGUAGE);
-		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PSYCHO);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_JAVALANGUAGE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_HTMLLANGUAGE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_VL);
@@ -246,6 +247,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVOURITE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_SBTABLE);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PUZZLETABLE);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PSYCHO);
 		// Create tables again
 		onCreate(db);
 
@@ -480,6 +482,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.insert(TABLE_DBMS, null, values);
 		db.close(); // Closing database connection
 	}
+	
+	void addPsychos(PsychoTable q) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(KEY_PSYCHOQUESTION, q.getQues()); // Contact Name
+		values.put(KEY_PSYCHOSCAT, q.getCat());
+		values.put(KEY_OPTION1, q.getOption1());
+		values.put(KEY_OPTION2, q.getOption2());
+		values.put(KEY_OPTION3, q.getOption3());
+		values.put(KEY_OPTION4, q.getOption4());
+		values.put(KEY_PSYCHOSOL, q.getSol());
+		// Contact Phone
+
+		// Inserting Row
+		db.insert(TABLE_PSYCHO, null, values);
+		db.close(); // Closing database connection
+	}
 
 	// Adding new DSA
 	void addDSA(DSATable q) {
@@ -544,13 +564,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	PsychoTable getPsychos(int id, String cat) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		// String where = "KEY_QUANTSID=? AND KEY_QUANTSCAT=? ";
 		Cursor cursor = db.query(TABLE_PSYCHO, new String[] { KEY_PSYCHOID,
 				KEY_PSYCHOQUESTION, KEY_PSYCHOSCAT, KEY_OPTION1, KEY_OPTION2,
-				KEY_OPTION3, KEY_OPTION4, KEY_PSYCHOSOL }, KEY_PSYCHOID + "=?"
-				+ " AND " + KEY_PSYCHOSOL + "=" + "'" + cat + "'",
+				KEY_OPTION3, KEY_OPTION4, KEY_PSYCHOSOL }, KEY_PSYCHOID + "=?",
 				new String[] { String.valueOf(id) }, null, null, null, null);
-		
 		
 		if (cursor != null)
 			cursor.moveToFirst();
@@ -565,6 +582,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	}
 	
+	PsychoTable getPsychos(int id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.query(TABLE_PSYCHO, new String[] { KEY_PSYCHOID,
+				KEY_PSYCHOQUESTION, KEY_PSYCHOSCAT, KEY_OPTION1, KEY_OPTION2,
+				KEY_OPTION3, KEY_OPTION4, KEY_PSYCHOSOL }, KEY_PSYCHOID + "=?",
+				new String[] { String.valueOf(id) }, null, null, null, null);
+		
+		if (cursor != null)
+			cursor.moveToFirst();
+
+		PsychoTable psycho = new PsychoTable(Integer.parseInt(cursor
+				.getString(0)), cursor.getString(1), cursor.getString(2),
+				cursor.getString(3), cursor.getString(4), cursor.getString(5),
+				cursor.getString(6), cursor.getString(7));
+		// return contact
+		db.close();
+		return psycho;
+
+	}
 	QuantsTable getQuants(int id) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor cursor = db.query(TABLE_QUANTS, new String[] { KEY_QUANTSID,
@@ -966,6 +1002,103 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close();
 		return quantsList;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	////////////////////////////////////////////////////
+	
+	
+	public List<PsychoTable> getAllPsycho(String cat) {
+		List<PsychoTable> psychoList = new ArrayList<PsychoTable>();
+		// Select All Query
+		String selectQuery = "SELECT  * FROM " + TABLE_PSYCHO + " where "
+				+ KEY_PSYCHOSCAT + "=" + "'" + cat + "'";
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+	
+		// looping through all rows and adding to li
+		if (cursor.moveToFirst()) {
+			do {
+
+				
+				PsychoTable psycho = new PsychoTable();
+				psycho.setID(Integer.parseInt(cursor.getString(0)));
+				psycho.setQues(cursor.getString(1));
+				psycho.setCat(cursor.getString(2));
+				psycho.setOption1(cursor.getString(3));
+				psycho.setOption2(cursor.getString(4));
+				psycho.setOption3(cursor.getString(5));
+				psycho.setOption4(cursor.getString(6));
+				psycho.setSol(cursor.getString(7));
+				// Adding contact to list
+				psychoList.add(psycho);
+
+				
+			} while (cursor.moveToNext());
+		}
+
+		// return contact list
+		db.close();
+		return psychoList;
+	}
+
+	public List<PsychoTable> getAllPsycho() {
+		List<PsychoTable> psychoList = new ArrayList<PsychoTable>();
+		// Select All Query
+		String selectQuery = "SELECT  * FROM " + TABLE_PSYCHO ;
+		;
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+	
+		// looping through all rows and adding to li
+		if (cursor.moveToFirst()) {
+			do {
+
+				
+				PsychoTable psycho = new PsychoTable();
+				psycho.setID(Integer.parseInt(cursor.getString(0)));
+				psycho.setQues(cursor.getString(1));
+				psycho.setCat(cursor.getString(2));
+				psycho.setOption1(cursor.getString(3));
+				psycho.setOption2(cursor.getString(4));
+				psycho.setOption3(cursor.getString(5));
+				psycho.setOption4(cursor.getString(6));
+				psycho.setSol(cursor.getString(7));
+				// Adding contact to list
+				psychoList.add(psycho);
+
+				
+			} while (cursor.moveToNext());
+		}
+
+		// return contact list
+		db.close();
+		return psychoList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////////////////////////////////
 
 	// Getting All C language
 	public List<CTable> getAllC(String cat) {

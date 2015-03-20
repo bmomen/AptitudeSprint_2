@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
 
+import com.aptitudeguru.dashboard.TestPage.MyCountDownTimer;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -27,10 +29,10 @@ import androidhive.dashboard.R;
 public class TestPsychometric extends Activity implements OnClickListener
 
 {
+
+
 	TextView t1, t2;
-	RadioButton b1, b2, b3, b4;
-	private EditText edittext;
-	 
+	TextView b1, b2, b3, b4, b5, b6, b7, b8;
 	int count = 1;
 	int start = 1;
 	int quesvisible = 0;
@@ -151,7 +153,7 @@ public class TestPsychometric extends Activity implements OnClickListener
 			btn_next.setVisibility(View.VISIBLE);
 			btn_prev.setVisibility(View.VISIBLE);
 		}
-		b1.setChecked(false);
+		/*b1.setChecked(false);
 		b2.setChecked(false);
 		b3.setChecked(false);
 		b4.setChecked(false);
@@ -169,10 +171,10 @@ public class TestPsychometric extends Activity implements OnClickListener
 			b4.setChecked(true);
 		else {
 		}
-
-		PsychoTable p1 = db.getPsychos(j2, cat);
+*/
+		PsychoTable q = db.getPsychos(j2, cat);
 		// i=i+1;
-		String j = p1.getQues();
+		String j = q.getQues();
 		String v = getLocaleCurrency(j);
 		// 
 		// Here we should change the question to ruppees, rs or such, to a variable which will 
@@ -181,10 +183,10 @@ public class TestPsychometric extends Activity implements OnClickListener
 		
 		t1.setText(v);
 		t2.setText("   " + (j1 + 1) + "/20");
-		String opt1 = p1.getOption1();
-		String opt2 = p1.getOption2();
-		String opt3 = p1.getOption3();
-		String opt4 = p1.getOption4();
+		String opt1 = q.getOption1();
+		String opt2 = q.getOption2();
+		String opt3 = q.getOption3();
+		String opt4 = q.getOption4();
 		
 		// Here we should change the answers to ruppees, rs or such, to a variable which will 
 		// replace it with the localised currency. We could either change it here, or create 
@@ -194,22 +196,30 @@ public class TestPsychometric extends Activity implements OnClickListener
 		b2.setText(opt2);
 		b3.setText(opt3);
 		b4.setText(opt4);
-
+		b5.setText("A");
+		b6.setText("B");
+		b7.setText("C");
+		b8.setText("D");
 	}
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout.);
+		//setContentView(R.layout.test);
+		setContentView(R.layout.psycho_test);
 
 		Bundle bundle = getIntent().getExtras();
 		cat = bundle.getString("cat");
 		start = bundle.getInt("start");
 
-		//b1 = (RadioButton) findViewById(R.id.option1);
-		//b2 = (RadioButton) findViewById(R.id.option2);
-		//b3 = (RadioButton) findViewById(R.id.option3);
-		//b4 = (RadioButton) findViewById(R.id.option4);
-
+		
+		b1 =  (TextView) findViewById(R.id.option1);
+		b2 = (TextView) findViewById(R.id.option2);
+		b3 = (TextView) findViewById(R.id.option3);
+		b4 = (TextView) findViewById(R.id.option4);
+		b5 = (TextView) findViewById(R.id.option5);
+		b6 = (TextView) findViewById(R.id.option6);
+		b7 = (TextView) findViewById(R.id.option7);
+		b8 = (TextView) findViewById(R.id.option8);
 		text = (TextView) this.findViewById(R.id.timer);
 		countDownTimer = new MyCountDownTimer(startTime, interval);
 
@@ -336,37 +346,10 @@ public class TestPsychometric extends Activity implements OnClickListener
 		/**
 		 * Handling all button click events
 		 * */
-		RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
-		radiogroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+	//	RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
+	//	radiogroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				// RadioButton r1=(RadioButton)findViewById(R.id.option1);
-				if (b1.isChecked()) {
-					b[click] = 1;
-					ans[click] = 1;
-					gotoclick[click] = 1;
-					// //String j=1+"";
-					// btn_cal+j.setBackgroundColor(Color.RED);
-
-				} else if (b2.isChecked()) {
-					b[click] = 2;
-					ans[click] = 2;
-					gotoclick[click] = 1;
-				} else if (b3.isChecked()) {
-					b[click] = 3;
-					ans[click] = 3;
-					gotoclick[click] = 1;
-				} else if (b4.isChecked()) {
-					b[click] = 4;
-					ans[click] = 4;
-					gotoclick[click] = 1;
-				} else {
-				}
-
-			}
-
-		});
+		
 
 		btn_finish.setOnClickListener(new OnClickListener() {
 
@@ -398,9 +381,9 @@ public class TestPsychometric extends Activity implements OnClickListener
 											int id) {
 										// if this button is clicked, close
 										// current activity
-										//Intent i = new Intent(
-												//getAppliionContext(),
-												//ShowScore.class);
+										Intent i = new Intent(
+												getApplicationContext(),
+												ShowScore.class);
 										time = text.getText() + "";
 
 										sec = sec + 40;
@@ -414,7 +397,7 @@ public class TestPsychometric extends Activity implements OnClickListener
 										DecimalFormat df = new DecimalFormat(
 												"00.00");
 										String j = df.format(tt);
-												/*view later
+
 										i.putExtra("score", ans);
 										i.putExtra("givenans", givenans);
 										i.putExtra("allid", a);
@@ -422,7 +405,6 @@ public class TestPsychometric extends Activity implements OnClickListener
 										i.putExtra("category", cat);
 
 										startActivity(i);
-										*/
 										TestPsychometric.this.finish();
 									}
 								})
@@ -458,7 +440,7 @@ public class TestPsychometric extends Activity implements OnClickListener
 				// startActivity(i);
 
 				int val = a[click];
-				QuantsTable q = db.getQuants(val, cat);
+				PsychoTable q = db.getPsychos(val, cat);
 				String ques = q.getQues();
 				String op1 = q.getOption1();
 				String op2 = q.getOption2();
@@ -503,8 +485,9 @@ public class TestPsychometric extends Activity implements OnClickListener
 		// Listening to Events button click
 
 		int g = 0;
-		List<QuantsTable> quants = db.getAllQuants(cat);
-		for (QuantsTable cn : quants) {
+	
+		List<PsychoTable> psycho = db.getAllPsycho(cat);
+		for (PsychoTable cn : psycho) {
 
 			if (g == 38)
 				break;
@@ -540,7 +523,7 @@ public class TestPsychometric extends Activity implements OnClickListener
 		btn_next = (Button) findViewById(R.id.btn_next);
 		btn_prev = (Button) findViewById(R.id.btn_prev);
 
-		QuantsTable q = db.getQuants(initial[count], cat);
+		PsychoTable q = db.getPsychos(initial[count], cat);
 
 		a[index++] = initial[count];
 		givenans[0] = initans[count];
@@ -586,10 +569,7 @@ public class TestPsychometric extends Activity implements OnClickListener
 					btn_prev.setEnabled(true);
 					btn_next.setVisibility(View.VISIBLE);
 					btn_prev.setVisibility(View.VISIBLE);
-					b1.setChecked(false);
-					b2.setChecked(false);
-					b3.setChecked(false);
-					b4.setChecked(false);
+				
 					RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
 					radiogroup.clearCheck();
 
@@ -599,19 +579,10 @@ public class TestPsychometric extends Activity implements OnClickListener
 
 					int val = a[click];
 					int check = b[click];
-					if (check == 1)
-						b1.setChecked(true);
-					else if (check == 2)
-						b2.setChecked(true);
-					else if (check == 3)
-						b3.setChecked(true);
-					else if (check == 4)
-						b4.setChecked(true);
-					else {
-					}
+					
 					t2.setText("   " + (click + 1) + "/20");
 
-					QuantsTable q = db.getQuants(val, cat);
+					PsychoTable q = db.getPsychos(val, cat);
 					// i=i+1;
 					String j = q.getQues();
 					/*
@@ -658,28 +629,16 @@ public class TestPsychometric extends Activity implements OnClickListener
 					btn_next.setEnabled(true);
 					btn_next.setVisibility(View.VISIBLE);
 					btn_prev.setVisibility(View.VISIBLE);
-					b1.setChecked(false);
-					b2.setChecked(false);
-					b3.setChecked(false);
-					b4.setChecked(false);
+				
 					RadioGroup radiogroup = (RadioGroup) findViewById(R.id.options);
 					radiogroup.clearCheck();
 
 					click = click - 1;
 					int val = a[click];
 					int check = b[click];
-					if (check == 1)
-						b1.setChecked(true);
-					else if (check == 2)
-						b2.setChecked(true);
-					else if (check == 3)
-						b3.setChecked(true);
-					else if (check == 4)
-						b4.setChecked(true);
-					else {
-					}
+					
 
-					QuantsTable q = db.getQuants(val, cat);
+					PsychoTable q = db.getPsychos(val, cat);
 					// i=i+1;
 					String j = q.getQues();
 					String v = getLocaleCurrency(j);

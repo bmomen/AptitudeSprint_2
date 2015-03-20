@@ -3,9 +3,9 @@ package com.aptitudeguru.dashboard;
 public class PsychoTable {
 
 	
-	int _quantsid;
-	String _quantsques;
-	String _quantscat;
+	int _psychoid;
+	String _psychoquestion;
+	String _psychoscat;
 	String _option1;
 	String _option2;
 	String _option3;
@@ -18,12 +18,12 @@ public class PsychoTable {
 	}
 
 	
-	public PsychoTable(int quantssid, String quantsques, String quantscat,
+	public PsychoTable(int psychosid, String psychoques, String psychocat,
 			String option1, String option2, String option3, String option4,
 			String sol) {
-		this._quantsid = quantssid;
-		this._quantsques = quantsques;
-		this._quantscat = quantscat;
+		this._psychoid = psychosid;
+		this._psychoquestion = psychoques;
+		this._psychoscat = psychocat;
 		this._option1 = option1;
 		this._option2 = option2;
 		this._option3 = option3;
@@ -31,11 +31,11 @@ public class PsychoTable {
 		this._sol = sol;
 	}
 
-	public PsychoTable(String quantsques, String quantscat, String option1,
+	public PsychoTable(String psychoques, String psychocat, String option1,
 			String option2, String option3, String option4, String sol) {
 
-		this._quantsques = quantsques;
-		this._quantscat = quantscat;
+		this._psychoquestion = psychoques;
+		this._psychoscat = psychocat;
 		this._option1 = option1;
 		this._option2 = option2;
 		this._option3 = option3;
@@ -45,32 +45,32 @@ public class PsychoTable {
 
 	
 	public int getID() {
-		return this._quantsid;
+		return this._psychoid;
 	}
 
 
-	public void setID(int quantsid) {
-		this._quantsid = quantsid;
+	public void setID(int psychoid) {
+		this._psychoid = psychoid;
 	}
 
 
 	public String getQues() {
-		return this._quantsques;
+		return this._psychoquestion;
 	}
 
 	
-	public void setQues(String quantsques) {
-		this._quantsques = quantsques;
+	public void setQues(String psychoques) {
+		this._psychoquestion = psychoques;
 	}
 
 	
 	public String getCat() {
-		return this._quantscat;
+		return this._psychoscat;
 	}
 
 	
-	public void setCat(String quantscat) {
-		this._quantscat = quantscat;
+	public void setCat(String psychocat) {
+		this._psychoscat = psychocat;
 	}
 
 	
