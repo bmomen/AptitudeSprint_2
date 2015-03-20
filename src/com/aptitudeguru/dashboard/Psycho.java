@@ -123,7 +123,7 @@ public class Psycho extends Activity {
 				
 						String cat = "p1";
 						
-						Intent i = new Intent(getApplicationContext(), TestPage.class);
+						Intent i = new Intent(getApplicationContext(), TestPsychometric.class);
 						i.putExtra("cat", cat);
 
 						startActivity(i);

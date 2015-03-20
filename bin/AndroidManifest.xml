@@ -151,6 +151,11 @@
             android:label="Score Board" 
             android:screenOrientation="portrait">
         </activity>
+         <activity
+            android:name="com.aptitudeguru.dashboard.PsychoTable"
+            android:label="PsychoTable" 
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name="com.aptitudeguru.dashboard.quantsscore" 
             android:screenOrientation="portrait">
         </activity>
@@ -160,6 +165,9 @@
             android:screenOrientation="portrait">
         </activity>
         <activity android:name="com.aptitudeguru.dashboard.TestPageos" 
+            android:screenOrientation="portrait">
+        </activity>
+         <activity android:name="com.aptitudeguru.dashboard.TestPsychometric" 
             android:screenOrientation="portrait">
         </activity>
         <activity
